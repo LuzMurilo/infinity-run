@@ -16,7 +16,5 @@ public class LaneController : MonoBehaviour
     {
         transform.GetComponentsInChildren<Transform>(false, obstacles);
         obstacles.Remove(transform);
-
-        obstacles.ForEach(obst => Debug.Log("[Lane"+index+"] obstacle: " + obst.name));
     }
 }
