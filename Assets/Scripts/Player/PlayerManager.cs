@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
         if (playerMovement)
         {
             playerMovement.isRunning = false;
+            playerMovement.isJumping = false;
         }
     }
 
