@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float forwardSpeed;
+    [SerializeField] private float forwardSpeed = 2.0f;
+    [SerializeField] private float sideSpeed = 10.0f;
+    [SerializeField] private float laneDistanceBias = 0.01f;
     [SerializeField] public bool isRunning;
     [SerializeField] private List<LaneController> lanes;
     private Dictionary<int, Transform> lanesTransforms;
@@ -31,9 +33,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isRunning) return;
 
-        if (transform.position.x != lanesTransforms[currentLane].position.x)
+        if (Mathf.Abs(transform.position.x - lanesTransforms[currentLane].position.x) > laneDistanceBias)
         {
-            transform.position += new Vector3(lanesTransforms[currentLane].position.x - transform.position.x, 0, 0);
+            Vector3 targetPosition = new Vector3(lanesTransforms[currentLane].position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, sideSpeed * Time.deltaTime);
+        }
+        else if (transform.position.x != lanesTransforms[currentLane].position.x)
+        {
+            transform.position = new Vector3(lanesTransforms[currentLane].position.x, transform.position.y, transform.position.z);
         }
 
         transform.Translate(Vector3.forward * Time.fixedDeltaTime * forwardSpeed, Space.World);

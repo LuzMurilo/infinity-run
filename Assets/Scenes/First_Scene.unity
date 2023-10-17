@@ -891,7 +891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75887d0a37e4d9146bdf0f6f864af27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 2
+  forwardSpeed: 5
+  sideSpeed: 10
+  laneDistanceBias: 0.01
   isRunning: 0
   lanes:
   - {fileID: 857400878}
