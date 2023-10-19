@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -9,14 +10,19 @@ public class PlayerManager : MonoBehaviour
 
     public int totalCoins = 0;
 
+    public UnityEvent OnPlayerDeath;
+    public UnityEvent OnTakeHit;
+
     public void Die()
     {
         Debug.Log("[Player] Player Died!");
-        if (playerMovement)
-        {
-            playerMovement.isRunning = false;
-            playerMovement.isJumping = false;
-        }
+
+        OnPlayerDeath.Invoke();
+    }
+
+    public void TakeHit()
+    {
+        OnTakeHit.Invoke();
     }
 
     public void GiveCoins(int coins)

@@ -111,4 +111,10 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
         }
     }
+
+    public void StopMovement()
+    {
+        isRunning = false;
+        isJumping = false;
+    }
 }
