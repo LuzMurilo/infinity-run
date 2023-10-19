@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed = 2.0f;
+    [SerializeField] private float slowedForwardSpeed = 1.0f;
+    private float currentForwardSpeed;
     [SerializeField] private float sideSpeed = 10.0f;
     [SerializeField] private float distanceBias = 0.01f;
     [SerializeField] private float jumpHeight = 3.0f;
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = true;
         currentLane = 0;
         lanes.ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
+        currentForwardSpeed = forwardSpeed;
     }
 
     private void FixedUpdate() 
@@ -60,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             JumpMovement();
         }
 
-        transform.Translate(Vector3.forward * Time.fixedDeltaTime * forwardSpeed, Space.World);
+        transform.Translate(Vector3.forward * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
     }
 
 
@@ -91,6 +94,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void StopMovement()
+    {
+        isRunning = false;
+        isJumping = false;
+    }
+
+    public void SetSlowSpeed()
+    {
+        currentForwardSpeed = slowedForwardSpeed;
+    }
+    public void SetNormalSpeed()
+    {
+        currentForwardSpeed = forwardSpeed;
+    }
 
     private bool CheckGrounded()
     {
@@ -112,9 +129,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void StopMovement()
-    {
-        isRunning = false;
-        isJumping = false;
-    }
+    
 }
