@@ -6,11 +6,12 @@ public class Block : MonoBehaviour
 {
     [SerializeField] private Vector2 lengthLimits;
     [SerializeField] private Vector2 angleLimits;
-    [SerializeField] private Transform start;
-    [SerializeField] private Transform finish;
     [SerializeField] private Transform ground;
+    public Transform start;
+    public Transform finish;
     public float length {get; private set;}
     public float angle {get; private set;}
+    private BlockSpawner blockSpawner;
 
     private void Awake() 
     {
@@ -19,5 +20,10 @@ public class Block : MonoBehaviour
         ground.localScale = new Vector3(ground.localScale.x, ground.localScale.y, length);
         ground.localPosition = new Vector3(0, 0, length / 2);
         finish.localPosition = new Vector3(0, 0, length);
+        
+        if (transform.parent.TryGetComponent<BlockSpawner>(out blockSpawner))
+        {
+            blockSpawner.ChangeNextSpawnPositon(finish.position);
+        }
     }
 }

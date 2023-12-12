@@ -5,15 +5,62 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] private Block blockPrefab;
-    private List<Block> blocks;
+    public Queue<Block> blocks;
+    private Vector3 nextSpawnPosition;
+    private int spawnQueue = 0;
 
     private void Awake() 
     {
-        blocks = new List<Block>();
+        blocks = new Queue<Block>();
+        nextSpawnPosition = transform.position;
     }
 
     private void Start() 
     {
-        blocks.Add(Instantiate<Block>(blockPrefab, transform.position, transform.rotation, transform));
+        SpawnNewBlock();
     }
+
+    public void SpawnNewBlock()
+    {
+        spawnQueue++;
+        if (spawnQueue == 1) InstantiateBlock();
+    }
+
+    private void InstantiateBlock()
+    {
+        blocks.Enqueue(Instantiate<Block>(blockPrefab, nextSpawnPosition, transform.rotation, transform));
+    }
+
+    public void DeleteLastBlock()
+    {
+        if (blocks.Count == 0)
+        {
+            if (spawnQueue == 0)
+            {
+                Debug.LogError("Trying to destroy blocks but the queue is empty!");
+                return;
+            }
+            spawnQueue--;
+            return;
+        }
+        GameObject blockToDelete = blocks.Peek().gameObject;
+        Destroy(blockToDelete);
+        blocks.Dequeue();
+    }
+
+    public void ChangeNextSpawnPositon(Vector3 position)
+    {
+        if (spawnQueue == 0) 
+        {
+            Debug.LogError("Block spawned but queue is empty!");
+            return;
+        }
+        spawnQueue--;
+        nextSpawnPosition = position;
+        if (spawnQueue > 0)
+        {
+            InstantiateBlock();
+        }
+    }
+
 }
