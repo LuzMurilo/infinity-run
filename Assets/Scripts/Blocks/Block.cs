@@ -14,6 +14,7 @@ public class Block : MonoBehaviour, ICollidable
     }
     public Transform start;
     public Transform finish;
+    public Vector3 direction;
     public float length {get; private set;}
     public float angle {get; private set;}
     private BlockSpawner blockSpawner;
@@ -27,6 +28,8 @@ public class Block : MonoBehaviour, ICollidable
         transform.Rotate(new Vector3(angle, 0, 0), Space.Self);
         ground.localPosition = new Vector3(0, 0, length / 2);
         finish.localPosition = new Vector3(0, 0, length);
+
+        direction = (finish.position - start.position).normalized;
         
         if (transform.parent.TryGetComponent<BlockSpawner>(out blockSpawner))
         {

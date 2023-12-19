@@ -62,7 +62,10 @@ public class PlayerMovement : MonoBehaviour
             JumpMovement();
         }
 
-        transform.Translate(Vector3.forward * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
+        if (currentBlock != null)
+        {
+            transform.Translate(currentBlock.direction * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
+        }
     }
 
     public void NewBlock(Block newBlock)
