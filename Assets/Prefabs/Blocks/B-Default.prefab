@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lengthLimits: {x: 40, y: 90}
-  angleLimits: {x: 0, y: 1}
+  angleLimits: {x: -20, y: 20}
+  ground: {fileID: 7412605779706256796}
   start: {fileID: 3234244009884691738}
   finish: {fileID: 7487332525018668249}
-  ground: {fileID: 7412605779706256796}
 --- !u!1 &4782475319284734383
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653591066569141760}
+  - component: {fileID: 5587753778997779946}
   m_Layer: 0
   m_Name: Lane -1
   m_TagString: Untagged
@@ -180,6 +181,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6314745463010571348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5587753778997779946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939535859539596534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fd757fb9e4c1046b211b19faf02082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: -1
 --- !u!1 &7198553409576422967
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4104643989784218495}
+  - component: {fileID: 8957498940450837512}
   m_Layer: 0
   m_Name: Lane 1
   m_TagString: Untagged
@@ -211,6 +226,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6314745463010571348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8957498940450837512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198553409576422967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fd757fb9e4c1046b211b19faf02082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 1
 --- !u!1 &8314517285331917077
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7299482077876297217}
+  - component: {fileID: 3955644954381507234}
   m_Layer: 0
   m_Name: Lane 0
   m_TagString: Untagged
@@ -242,6 +271,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6314745463010571348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3955644954381507234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8314517285331917077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fd757fb9e4c1046b211b19faf02082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
 --- !u!1 &8918942487359910456
 GameObject:
   m_ObjectHideFlags: 0

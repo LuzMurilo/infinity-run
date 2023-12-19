@@ -17,7 +17,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void Start() 
     {
-        SpawnNewBlock();
+        //SpawnNewBlock();
     }
 
     public void SpawnNewBlock()
@@ -53,6 +53,7 @@ public class BlockSpawner : MonoBehaviour
         if (spawnQueue == 0) 
         {
             Debug.LogError("Block spawned but queue is empty!");
+            nextSpawnPosition = position;
             return;
         }
         spawnQueue--;

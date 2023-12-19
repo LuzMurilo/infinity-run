@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] public bool isRunning;
-    [SerializeField] private List<LaneController> lanes;
+    [SerializeField] private Block currentBlock;
     private Dictionary<int, Transform> lanesTransforms;
     public int currentLane;
 
@@ -30,11 +30,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() 
     {
-        isRunning = true;
+        isRunning = false;
         isJumping = false;
         isGrounded = true;
         currentLane = 0;
-        lanes.ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
         currentForwardSpeed = forwardSpeed;
     }
 
@@ -64,6 +63,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.Translate(Vector3.forward * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
+    }
+
+    public void NewBlock(Block newBlock)
+    {
+        lanesTransforms.Clear();
+        currentBlock = newBlock;
+        currentBlock.Lanes.ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
+        if (!isRunning)
+        {
+            isRunning = true;
+        }
     }
 
 
