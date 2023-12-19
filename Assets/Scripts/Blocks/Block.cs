@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class Block : MonoBehaviour, ICollidable
 {
     [SerializeField] private Vector2 lengthLimits;
     [SerializeField] private Vector2 angleLimits;
@@ -32,5 +32,11 @@ public class Block : MonoBehaviour
         {
             blockSpawner.ChangeNextSpawnPositon(finish.position);
         }
+    }
+
+    public void OnCollideWithPlayer(PlayerManager player)
+    {
+        player.EnteredNewBlock(this);
+        blockSpawner.SpawnNewBlock();
     }
 }

@@ -41,6 +41,12 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("[Player] got " + coins + " coins, total: " + totalCoins);
     }
 
+    public void EnteredNewBlock(Block block)
+    {
+        playerMovement.NewBlock(block);
+        Debug.Log("[Player] Entered a new block!");
+    }
+
     private IEnumerator InvulnerableFrame(float seconds)
     {
         isInvulnerable = true;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] private Block blockPrefab;
+    [SerializeField] private int maxBlocks;
     public Queue<Block> blocks;
     private Vector3 nextSpawnPosition;
     private int spawnQueue = 0;
@@ -17,13 +18,14 @@ public class BlockSpawner : MonoBehaviour
 
     private void Start() 
     {
-        //SpawnNewBlock();
+        SpawnNewBlock();
     }
 
     public void SpawnNewBlock()
     {
         spawnQueue++;
         if (spawnQueue == 1) InstantiateBlock();
+        if (blocks.Count > maxBlocks) DeleteLastBlock();
     }
 
     private void InstantiateBlock()
@@ -52,8 +54,7 @@ public class BlockSpawner : MonoBehaviour
     {
         if (spawnQueue == 0) 
         {
-            Debug.LogError("Block spawned but queue is empty!");
-            nextSpawnPosition = position;
+            Debug.Log("Block spawned but queue is empty! (FirstBlock spawn)");
             return;
         }
         spawnQueue--;

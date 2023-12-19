@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 93951071794139168}
   - component: {fileID: 679072490619975100}
+  - component: {fileID: 2099948683242891298}
   m_Layer: 0
   m_Name: B-Default
   m_TagString: Untagged
@@ -51,8 +52,33 @@ MonoBehaviour:
   lengthLimits: {x: 40, y: 90}
   angleLimits: {x: -20, y: 20}
   ground: {fileID: 7412605779706256796}
+  lanes:
+  - {fileID: 5587753778997779946}
+  - {fileID: 3955644954381507234}
+  - {fileID: 8957498940450837512}
   start: {fileID: 3234244009884691738}
   finish: {fileID: 7487332525018668249}
+--- !u!65 &2099948683242891298
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383690884951324089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 1}
+  m_Center: {x: 0, y: 3, z: 0.5}
 --- !u!1 &4782475319284734383
 GameObject:
   m_ObjectHideFlags: 0
