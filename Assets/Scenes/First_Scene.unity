@@ -2216,7 +2216,7 @@ PrefabInstance:
     - target: {fileID: 8805348737786642342, guid: 70b703d136c37d7478988b9b3db17995,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805348737786642342, guid: 70b703d136c37d7478988b9b3db17995,
         type: 3}
@@ -3859,6 +3859,11 @@ PrefabInstance:
         type: 3}
       propertyPath: lengthLimits.y
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 679072490619975100, guid: 9ffb3521c5354c94cbb50d5b1c18ef37,
+        type: 3}
+      propertyPath: interactables.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1383690884951324089, guid: 9ffb3521c5354c94cbb50d5b1c18ef37,
         type: 3}
@@ -7901,7 +7906,7 @@ PrefabInstance:
     - target: {fileID: 8805348737786642342, guid: 70b703d136c37d7478988b9b3db17995,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805348737786642342, guid: 70b703d136c37d7478988b9b3db17995,
         type: 3}

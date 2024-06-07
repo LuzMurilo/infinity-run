@@ -56,8 +56,12 @@ MonoBehaviour:
   - {fileID: 5587753778997779946}
   - {fileID: 3955644954381507234}
   - {fileID: 8957498940450837512}
+  interactables:
+  - {fileID: 3620884923069111815, guid: 70b703d136c37d7478988b9b3db17995, type: 3}
+  - {fileID: 4957942360579754877, guid: 9b9528a2d2569e645aa912699217c90f, type: 3}
   start: {fileID: 3234244009884691738}
   finish: {fileID: 7487332525018668249}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!65 &2099948683242891298
 BoxCollider:
   m_ObjectHideFlags: 0

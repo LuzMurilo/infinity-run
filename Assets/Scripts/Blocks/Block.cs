@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Block : MonoBehaviour, ICollidable
@@ -12,6 +13,7 @@ public class Block : MonoBehaviour, ICollidable
         get {return lanes;}
         private set {}
     }
+    [SerializeField] private List<GameObject> interactables;
     public Transform start;
     public Transform finish;
     public Vector3 direction;
@@ -35,11 +37,21 @@ public class Block : MonoBehaviour, ICollidable
         {
             blockSpawner.ChangeNextSpawnPositon(finish.position);
         }
+
+        SpawnInteractables();
     }
 
     public void OnCollideWithPlayer(PlayerManager player)
     {
         player.EnteredNewBlock(this);
         blockSpawner.SpawnNewBlock();
+    }
+
+    private void SpawnInteractables()
+    {
+        if (interactables == null || interactables.Count == 0) return;
+        GameObject prefabToSpawn = interactables[Random.Range(0, interactables.Count)];
+        Vector3 spawnPosition = new Vector3(ground.position.x, ground.position.y + 0.5f, ground.position.z);
+        Instantiate(prefabToSpawn, spawnPosition, transform.rotation, transform);
     }
 }
