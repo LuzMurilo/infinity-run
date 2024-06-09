@@ -7,6 +7,7 @@ public class Block : MonoBehaviour, ICollidable
 {
     [SerializeField] private Vector2 lengthLimits;
     [SerializeField] private Vector2 angleLimits;
+    [SerializeField] private float minObstacleDistance;
     [SerializeField] private Transform ground;
     [SerializeField] private List<LaneController> lanes;
     public List<LaneController> Lanes {
@@ -50,8 +51,28 @@ public class Block : MonoBehaviour, ICollidable
     private void SpawnInteractables()
     {
         if (interactables == null || interactables.Count == 0) return;
+        InstantiateInteractable(0);
+        for (int i = Mathf.FloorToInt(length/minObstacleDistance) - 1; i > 0; i--)
+        {
+            InstantiateInteractable(i);
+        }
+    }
+
+    private void InstantiateInteractable(int positionInBlock)
+    {
+        if (interactables == null || interactables.Count == 0) return;
         GameObject prefabToSpawn = interactables[Random.Range(0, interactables.Count)];
-        Vector3 spawnPosition = new Vector3(ground.position.x, ground.position.y + 0.5f, ground.position.z);
+        int laneToSpawn = Random.Range(0, lanes.Count);
+
+        float positionX = lanes[laneToSpawn].transform.position.x;
+        float positionY = transform.position.y + 0.5f;
+        float positionZ = transform.position.z + (positionInBlock * minObstacleDistance);
+        if (angle != 0.0f)
+        {
+            positionY -= Mathf.Tan(Mathf.Deg2Rad * angle) * positionInBlock * minObstacleDistance;
+        }
+
+        Vector3 spawnPosition = new Vector3(positionX, positionY, positionZ);
         Instantiate(prefabToSpawn, spawnPosition, transform.rotation, transform);
     }
 }
