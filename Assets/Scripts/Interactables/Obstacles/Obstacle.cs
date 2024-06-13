@@ -5,6 +5,7 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour, ICollidable
 {
     [SerializeField] private ObstacleSO obstacleData;
+    [SerializeField] private MeshRenderer mesh;
     private bool isDestroyed = false;
 
     public void OnCollideWithPlayer(PlayerManager player)
@@ -19,7 +20,7 @@ public class Obstacle : MonoBehaviour, ICollidable
         else
         {
             player.TakeHit();
-            GetComponent<MeshRenderer>().enabled = false;
+            mesh.enabled = false;
         }
 
         isDestroyed = true;

@@ -60,6 +60,8 @@ MonoBehaviour:
   interactables:
   - {fileID: 3620884923069111815, guid: 70b703d136c37d7478988b9b3db17995, type: 3}
   - {fileID: 4957942360579754877, guid: 9b9528a2d2569e645aa912699217c90f, type: 3}
+  - {fileID: 6441733666949355900, guid: b8aa220aaeec94c4bbbe5cf781134c3e, type: 3}
+  - {fileID: 9014894853937726904, guid: 003d9f25e9362f643bc0e0dd9cd472df, type: 3}
   start: {fileID: 3234244009884691738}
   finish: {fileID: 7487332525018668249}
   direction: {x: 0, y: 0, z: 0}
