@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1906615758383564690}
   - component: {fileID: 505325695292278406}
   - component: {fileID: 2279811279602149198}
+  - component: {fileID: 9130287867016641366}
   m_Layer: 0
   m_Name: ShortWall
   m_TagString: Collidable
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleData: {fileID: 11400000, guid: f31676e6124f18d408bc8cf76f73a9ac, type: 2}
   mesh: {fileID: 357014835030516355}
+--- !u!114 &9130287867016641366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556062605718357839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleLanes: 00000000
 --- !u!1 &8391667224697980263
 GameObject:
   m_ObjectHideFlags: 0

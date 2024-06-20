@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4267924582266808015}
   - component: {fileID: 1188652763676458071}
   - component: {fileID: 7887612699266484323}
+  - component: {fileID: -1422839001680211924}
   m_Layer: 0
   m_Name: Super Coin
   m_TagString: Untagged
@@ -68,6 +69,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupData: {fileID: 11400000, guid: 269657d40b9832744b5982cc11721f7a, type: 2}
+--- !u!114 &-1422839001680211924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957942360579754877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleLanes: 0000000001000000ffffffff
 --- !u!1 &7956805149323930709
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +93,6 @@ GameObject:
   - component: {fileID: 8447988082260334407}
   - component: {fileID: 5313511557729709818}
   - component: {fileID: 1371461987104023072}
-  - component: {fileID: 1639960863083064619}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -152,24 +165,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1639960863083064619
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956805149323930709}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: -0.0000038146973}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3739569375600918187}
   - component: {fileID: 5634981025638962682}
   - component: {fileID: 2856260782015439053}
+  - component: {fileID: -939549197635002043}
   m_Layer: 0
   m_Name: BigRock
   m_TagString: Collidable
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleData: {fileID: 11400000, guid: d8a70854e9ec1cb43a4609bc0baf458b, type: 2}
   mesh: {fileID: 8331132108461023255}
+--- !u!114 &-939549197635002043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619664006043077673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleLanes: 00000000
 --- !u!1 &6479162022552208894
 GameObject:
   m_ObjectHideFlags: 0

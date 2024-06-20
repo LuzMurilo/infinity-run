@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3426416545579438449}
   - component: {fileID: 3510315558754987042}
   - component: {fileID: 5469358164838103386}
+  - component: {fileID: -4363185724249168948}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Collidable
@@ -152,3 +153,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleData: {fileID: 11400000, guid: 9609071b01034b743af40b7b444834f5, type: 2}
   mesh: {fileID: 496915988901126153}
+--- !u!114 &-4363185724249168948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441733666949355900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleLanes: 0000000001000000ffffffff

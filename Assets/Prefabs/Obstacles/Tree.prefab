@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8805348737786642342}
   - component: {fileID: 5482762988843480688}
   - component: {fileID: 6835273900962990944}
+  - component: {fileID: -5703455051053517834}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Collidable
@@ -71,6 +72,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleData: {fileID: 11400000, guid: 6e0e98572f90e6e4b932fe0aa12bc145, type: 2}
   mesh: {fileID: 8167980333365433254}
+--- !u!114 &-5703455051053517834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620884923069111815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleLanes: 0000000001000000ffffffff
 --- !u!1 &6476274378505028942
 GameObject:
   m_ObjectHideFlags: 0

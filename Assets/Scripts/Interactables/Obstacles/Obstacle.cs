@@ -5,6 +5,11 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour, ICollidable
 {
     [SerializeField] private ObstacleSO obstacleData;
+    public ObstacleSO Data {get{
+        return obstacleData;
+    } private set{
+        Debug.LogWarning("Can't set obstacle data on runtime!");
+    }}
     [SerializeField] private MeshRenderer mesh;
     private bool isDestroyed = false;
 
@@ -21,6 +26,11 @@ public class Obstacle : MonoBehaviour, ICollidable
         {
             player.TakeHit();
             mesh.enabled = false;
+            Collider collider = GetComponent<Collider>();
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
         }
 
         isDestroyed = true;

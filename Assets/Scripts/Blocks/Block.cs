@@ -10,8 +10,9 @@ public class Block : MonoBehaviour, ICollidable
     [SerializeField] private float minObstacleDistance;
     [SerializeField] private Transform ground;
     [SerializeField] private List<LaneController> lanes;
-    public List<LaneController> Lanes {
-        get {return lanes;}
+    [SerializeField] private Dictionary<int, LaneController> lanesDict;
+    public Dictionary<int, LaneController> Lanes {
+        get {return lanesDict;}
         private set {}
     }
     [SerializeField] private List<GameObject> interactables;
@@ -24,6 +25,8 @@ public class Block : MonoBehaviour, ICollidable
 
     private void Awake() 
     {
+        lanesDict = new Dictionary<int, LaneController>();
+        lanes.ForEach(lane => lanesDict.Add(lane.index, lane));
         length = Mathf.Floor(Random.Range(lengthLimits.x, lengthLimits.y));
         angle = Mathf.Floor(Random.Range(angleLimits.x, angleLimits.y));
         if (angle % 2 != 0) angle = 0.0f;
@@ -61,10 +64,13 @@ public class Block : MonoBehaviour, ICollidable
     private void InstantiateInteractable(int positionInBlock)
     {
         if (interactables == null || interactables.Count == 0) return;
-        GameObject prefabToSpawn = interactables[Random.Range(0, interactables.Count)];
-        int laneToSpawn = Random.Range(0, lanes.Count);
 
-        float positionX = lanes[laneToSpawn].transform.position.x;
+        GameObject prefabToSpawn = interactables[Random.Range(0, interactables.Count)];
+
+        int[] possibleLanes = prefabToSpawn.GetComponent<Interactable>().Lanes;
+        int laneToSpawn = possibleLanes[Random.Range(0, possibleLanes.Length)];
+
+        float positionX = lanesDict[laneToSpawn].transform.position.x;
         float positionY = transform.position.y + 0.5f;
         float positionZ = transform.position.z + (positionInBlock * minObstacleDistance);
         if (angle != 0.0f)

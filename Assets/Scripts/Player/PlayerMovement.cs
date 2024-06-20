@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     {
         lanesTransforms.Clear();
         currentBlock = newBlock;
-        currentBlock.Lanes.ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
+        currentBlock.Lanes.Values.ToList().ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
         if (!isRunning)
         {
             isRunning = true;

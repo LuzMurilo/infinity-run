@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4814656092473679005}
   - component: {fileID: 3891176236807979980}
   - component: {fileID: 2976601103673485215}
+  - component: {fileID: 5376522128242345635}
   m_Layer: 0
   m_Name: BigWall
   m_TagString: Collidable
@@ -152,3 +153,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleData: {fileID: 11400000, guid: f31676e6124f18d408bc8cf76f73a9ac, type: 2}
   mesh: {fileID: 6807912615108301220}
+--- !u!114 &5376522128242345635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7933297516877382037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleLanes: 00000000
