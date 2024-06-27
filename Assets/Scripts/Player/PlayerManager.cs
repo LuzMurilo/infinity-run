@@ -16,8 +16,13 @@ public class PlayerManager : MonoBehaviour
 
     private void Start() 
     {
-        isInvulnerable = false;
         totalCoins = 0;
+    }
+
+    public void StartPlayer()
+    {
+        isInvulnerable = false;
+        playerMovement.StartMovement();
     }
 
     public void Die()

@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa1f7e403081154693d9cfa70884f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lengthLimits: {x: 40, y: 90}
-  angleLimits: {x: -20, y: 20}
-  minObstacleDistance: 10
+  lengthLimits: {x: 50, y: 150}
+  angleLimits: {x: -10, y: 20}
+  minObstacleDistance: 20
   ground: {fileID: 7412605779706256796}
   lanes:
   - {fileID: 5587753778997779946}

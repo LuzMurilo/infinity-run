@@ -43,9 +43,14 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
     }
 
+    public void StartMovement()
+    {
+        isRunning = true;
+    }
+
     private void HandleMovement()
     {
-        if (!isRunning) return;
+        if (!isRunning || currentBlock == null) return;
         isGrounded = CheckGrounded();
 
         if (Mathf.Abs(transform.position.x - lanesTransforms[currentLane].position.x) > distanceBias)
@@ -63,10 +68,7 @@ public class PlayerMovement : MonoBehaviour
             JumpMovement();
         }
 
-        if (currentBlock != null)
-        {
-            transform.Translate(currentBlock.direction * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
-        }
+        transform.Translate(currentBlock.direction * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
     }
 
     public void NewBlock(Block newBlock)
@@ -74,10 +76,6 @@ public class PlayerMovement : MonoBehaviour
         lanesTransforms.Clear();
         currentBlock = newBlock;
         currentBlock.Lanes.Values.ToList().ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
-        if (!isRunning)
-        {
-            isRunning = true;
-        }
     }
 
 
@@ -134,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpElapsedTime += Time.fixedDeltaTime;
             float percentageComplete = jumpElapsedTime / jumpTime;
-            float newYPos = (jumpCurve.Evaluate(percentageComplete) * (jumpHeight)) + jumpTargetHeight - jumpHeight;
+            float newYPos = (jumpCurve.Evaluate(percentageComplete) * jumpHeight) + jumpTargetHeight - jumpHeight;
             transform.position = new Vector3(transform.position.x, newYPos, transform.position.z);
         }
         else
