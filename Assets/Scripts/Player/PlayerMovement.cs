@@ -7,22 +7,27 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed = 2.0f;
     [SerializeField] private float slowedForwardSpeed = 1.0f;
-    private float currentForwardSpeed;
+    [SerializeField] private float currentForwardSpeed;
+    private float addedSpeed;
     [SerializeField] private float sideSpeed = 10.0f;
     [SerializeField] private float distanceBias = 0.01f;
     [SerializeField] private float jumpHeight = 3.0f;
     [SerializeField] private float jumpTime = 1.0f;
-    [SerializeField] public bool isJumping = false;
     private float jumpTargetHeight = 0.0f;
     private float jumpElapsedTime = 0.0f;
     [SerializeField] private AnimationCurve jumpCurve;
-    [SerializeField] private bool isGrounded;
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private LayerMask groundLayers;
-    [SerializeField] public bool isRunning;
     [SerializeField] private Block currentBlock;
     private Dictionary<int, Transform> lanesTransforms;
     public int currentLane;
+
+    // BOOLS
+    [SerializeField] public bool isRunning {get; private set;}
+    [SerializeField] public bool isGrounded {get; private set;}
+    [SerializeField] public bool isJumping {get; private set;}
+    [SerializeField] public bool isSlowed {get; private set;}
+
 
     private void Awake() 
     {
@@ -34,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
         isRunning = false;
         isJumping = false;
         isGrounded = true;
+        isSlowed = false;
         currentLane = 0;
-        currentForwardSpeed = forwardSpeed;
     }
 
     private void FixedUpdate() 
@@ -46,41 +51,12 @@ public class PlayerMovement : MonoBehaviour
     public void StartMovement()
     {
         isRunning = true;
+        isSlowed = false;
+        currentForwardSpeed = forwardSpeed;
+        addedSpeed = 0;
     }
 
-    private void HandleMovement()
-    {
-        if (!isRunning || currentBlock == null) return;
-        isGrounded = CheckGrounded();
-
-        if (Mathf.Abs(transform.position.x - lanesTransforms[currentLane].position.x) > distanceBias)
-        {
-            Vector3 targetPosition = new Vector3(lanesTransforms[currentLane].position.x, transform.position.y, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, sideSpeed * Time.deltaTime);
-        }
-        else if (transform.position.x != lanesTransforms[currentLane].position.x)
-        {
-            transform.position = new Vector3(lanesTransforms[currentLane].position.x, transform.position.y, transform.position.z);
-        }
-
-        if (isJumping)
-        {
-            JumpMovement();
-        }
-
-        transform.Translate(currentBlock.direction * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
-    }
-
-    public void NewBlock(Block newBlock)
-    {
-        lanesTransforms.Clear();
-        currentBlock = newBlock;
-        currentBlock.Lanes.Values.ToList().ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
-    }
-
-
-
-    //// CONTROLS
+    // CONTROLS
     public void ChangeToLane(int newLaneIndex)
     {
         if (newLaneIndex == currentLane) return;
@@ -106,6 +82,47 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // INTERNALS
+    private void HandleMovement()
+    {
+        if (!isRunning || currentBlock == null) return;
+        isGrounded = CheckGrounded();
+
+        if (Mathf.Abs(transform.position.x - lanesTransforms[currentLane].position.x) > distanceBias)
+        {
+            Vector3 targetPosition = new Vector3(lanesTransforms[currentLane].position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, sideSpeed * Time.deltaTime);
+        }
+        else if (transform.position.x != lanesTransforms[currentLane].position.x)
+        {
+            transform.position = new Vector3(lanesTransforms[currentLane].position.x, transform.position.y, transform.position.z);
+        }
+
+        if (isJumping)
+        {
+            JumpMovement();
+        }
+
+        if (isSlowed)
+        {
+            currentForwardSpeed = slowedForwardSpeed;
+        }
+        else if (currentForwardSpeed < forwardSpeed + addedSpeed) // If player is slower than the desired speed, increment slowly
+        {
+            currentForwardSpeed += 5.0f * Time.deltaTime;
+            if (currentForwardSpeed > forwardSpeed + addedSpeed) currentForwardSpeed = forwardSpeed + addedSpeed;
+        }
+        
+        transform.Translate(currentBlock.direction * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
+    }
+
+    public void NewBlock(Block newBlock)
+    {
+        lanesTransforms.Clear();
+        currentBlock = newBlock;
+        currentBlock.Lanes.Values.ToList().ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
+    }
+
     public void StopMovement()
     {
         isRunning = false;
@@ -114,11 +131,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetSlowSpeed()
     {
-        currentForwardSpeed = slowedForwardSpeed;
+        isSlowed = true;
     }
     public void SetNormalSpeed()
     {
-        currentForwardSpeed = forwardSpeed;
+        isSlowed = false;
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        addedSpeed += amount;
     }
 
     private bool CheckGrounded()

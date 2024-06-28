@@ -9,19 +9,17 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerCollision playerCollision;
 
     public int totalCoins;
+    public int blocksTraveled;
     public bool isInvulnerable;
 
     public UnityEvent OnPlayerDeath;
     public UnityEvent OnTakeHit;
 
-    private void Start() 
-    {
-        totalCoins = 0;
-    }
-
     public void StartPlayer()
     {
         isInvulnerable = false;
+        totalCoins = 0;
+        blocksTraveled = 0;
         playerMovement.StartMovement();
     }
 
@@ -49,7 +47,8 @@ public class PlayerManager : MonoBehaviour
     public void EnteredNewBlock(Block block)
     {
         playerMovement.NewBlock(block);
-        Debug.Log("[Player] Entered a new block!");
+        blocksTraveled += 1;
+        playerMovement.IncreaseSpeed(0.5f);
     }
 
     private IEnumerator InvulnerableFrame(float seconds)
