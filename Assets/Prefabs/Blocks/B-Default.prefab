@@ -66,6 +66,8 @@ MonoBehaviour:
   - {fileID: 2808550345279206933, guid: a818b3b1a0a386b49bd05d0eb9053ab3, type: 3}
   - {fileID: 4268080618346803447, guid: f4df6a6d684193445bc434717886aed6, type: 3}
   - {fileID: 4268080618346803447, guid: 67cd63cad6ed19a468b92caf7a08dca3, type: 3}
+  - {fileID: 7933297516877382037, guid: b3e3df8fc87ea0c4ca987a6dfc00ce99, type: 3}
+  - {fileID: 7933297516877382037, guid: 069755bdc3ab97f4fb30d37ef9d54ffe, type: 3}
   start: {fileID: 3234244009884691738}
   finish: {fileID: 7487332525018668249}
   direction: {x: 0, y: 0, z: 0}

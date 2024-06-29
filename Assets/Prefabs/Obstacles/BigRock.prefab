@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9720cb695eb1a54ca035029d356b2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleLanes: 00000000
+  possibleLanes: 0000000001000000ffffffff
 --- !u!1 &6479162022552208894
 GameObject:
   m_ObjectHideFlags: 0
