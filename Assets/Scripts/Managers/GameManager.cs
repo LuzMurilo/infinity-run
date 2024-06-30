@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static GameManager Singleton {get; private set;}
     [SerializeField] PlayerManager player;
+
+    private void Awake() 
+    {
+        if (GameManager.Singleton != null)
+        {
+            Destroy(this);
+            return;
+        }
+        GameManager.Singleton = this;
+    }
     void Start()
     {
         Debug.Log("[GM] Game Started!");

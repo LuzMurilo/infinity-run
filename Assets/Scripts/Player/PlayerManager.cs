@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
     public void GiveCoins(int coins)
     {
         totalCoins += coins;
-        Debug.Log("[Player] got " + coins + " coins, total: " + totalCoins);
+        UIManager.Singleton.SetCoinDisplayNumber(totalCoins);
     }
 
     public void EnteredNewBlock(Block block)
