@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float forwardSpeed = 2.0f;
     [SerializeField] private float slowedForwardSpeed = 1.0f;
     [SerializeField] private float currentForwardSpeed;
+    [SerializeField] private float speedIncreasePerBlock;
     private float addedSpeed;
     [SerializeField] private float sideSpeed = 10.0f;
     [SerializeField] private float distanceBias = 0.01f;
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AnimationCurve jumpCurve;
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private LayerMask groundLayers;
-    [SerializeField] private Block currentBlock;
+    public Block currentBlock {get; private set;}
     private Dictionary<int, Transform> lanesTransforms;
     public int currentLane;
 
@@ -121,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         lanesTransforms.Clear();
         currentBlock = newBlock;
         currentBlock.Lanes.Values.ToList().ForEach(lane => lanesTransforms.Add(lane.index, lane.transform));
+        IncreaseSpeed(speedIncreasePerBlock);
     }
 
     public void StopMovement()

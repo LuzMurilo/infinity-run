@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
 
     public UnityEvent OnPlayerDeath;
     public UnityEvent OnTakeHit;
+    public UnityEvent<Block> OnEnterBlock;
 
     public void StartPlayer()
     {
@@ -60,9 +61,8 @@ public class PlayerManager : MonoBehaviour
 
     public void EnteredNewBlock(Block block)
     {
-        playerMovement.NewBlock(block);
         blocksTraveled += 1;
-        playerMovement.IncreaseSpeed(0.5f);
+        OnEnterBlock.Invoke(block);
     }
 
     private IEnumerator InvulnerableFrame(float seconds)
