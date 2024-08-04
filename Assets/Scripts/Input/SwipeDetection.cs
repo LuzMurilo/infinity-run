@@ -1,6 +1,5 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class SwipeDetection : MonoBehaviour
 {
@@ -11,6 +10,11 @@ public class SwipeDetection : MonoBehaviour
     private float startTime;
     private Vector2 endPosition;
     private float endTime;
+
+    public UnityEvent OnSwipeUp;
+    public UnityEvent OnSwipeDown;
+    public UnityEvent OnSwipeLeft;
+    public UnityEvent OnSwipeRight;
 
     private void OnEnable() 
     {
@@ -39,10 +43,28 @@ public class SwipeDetection : MonoBehaviour
 
     private void DetectSwipe()
     {
+        //Debug.Log("distance = " + Vector2.Distance(startPosition, endPosition));
+        //Debug.Log("time = " + (endTime - startTime));
         if (Vector2.Distance(startPosition, endPosition) < minimumDistance) return;
         if (endTime - startTime > maximumTime) return;
 
-        Debug.Log("Swipe Detected!");
-        Debug.DrawLine(startPosition, endPosition, Color.red, 2f);
+        Vector2 direction = (endPosition - startPosition).normalized;
+        if (Vector2.Dot(direction, Vector2.up) > 0.5f)
+        {
+            OnSwipeUp.Invoke();
+        }
+        else if (Vector2.Dot(direction, Vector2.down) > 0.5f)
+        {
+            OnSwipeDown.Invoke();
+        }
+        else if (Vector2.Dot(direction, Vector2.right) > 0.5f)
+        {
+            OnSwipeRight.Invoke();
+        }
+        else if (Vector2.Dot(direction, Vector2.left) > 0.5f)
+        {
+            OnSwipeLeft.Invoke();
+        }
     }
+
 }

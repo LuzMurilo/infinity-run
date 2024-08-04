@@ -47,6 +47,6 @@ public class InputManager : MonoBehaviour
     }
     private void EndTouch(InputAction.CallbackContext context)
     {
-        OnTouchEnded.Invoke(touchControl.Player.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
+        OnTouchEnded.Invoke(touchControl.Player.TouchPosition.ReadValue<Vector2>(), (float)context.time);
     }
 }
