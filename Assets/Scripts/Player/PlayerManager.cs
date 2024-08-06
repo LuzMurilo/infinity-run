@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
         blocksTraveled = 0;
         currentLife = maxLife;
         UIManager.Singleton.SetHeartsDisplayed(currentLife);
-        playerMovement.StartMovement();
+        //playerMovement.StartMovement();
     }
 
     public void Die()

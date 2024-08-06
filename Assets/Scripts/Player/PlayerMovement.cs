@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     // CONTROLS
     public void ChangeToLane(int newLaneIndex)
     {
-        if (newLaneIndex == currentLane) return;
+        if (!isRunning || newLaneIndex == currentLane) return;
         if (!lanesTransforms.ContainsKey(newLaneIndex)) return;
 
         currentLane = newLaneIndex;
