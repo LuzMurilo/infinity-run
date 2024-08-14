@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Singleton {get; private set;}
-    [SerializeField] PlayerManager player;
+    [SerializeField] private PlayerManager player;
 
     private void Awake() 
     {
@@ -21,4 +21,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("[GM] Game Started!");
         player.StartPlayer();
     }
+
+    public void RestartGame()
+    {
+        Debug.Log("[GM] Restarting Game...");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }

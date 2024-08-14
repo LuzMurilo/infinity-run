@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate() 
     {
+        if (playerMovement.currentBlock == null) return;
+        
         float currentAngle = transform.eulerAngles.x;
         if (currentAngle > 180.0f) currentAngle -= 360.0f;
         if (playerMovement.currentBlock.angle != currentAngle)

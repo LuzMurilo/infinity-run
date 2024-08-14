@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public bool isInvulnerable {get; private set;}
     public bool isDead {get; private set;}
 
-    public UnityEvent OnPlayerDeath;
+    public UnityEvent<PlayerManager> OnPlayerDeath; //this
     public UnityEvent OnTakeHit;
     public UnityEvent<Block> OnEnterBlock;
 
@@ -27,7 +27,6 @@ public class PlayerManager : MonoBehaviour
         blocksTraveled = 0;
         currentLife = maxLife;
         UIManager.Singleton.SetHeartsDisplayed(currentLife);
-        //playerMovement.StartMovement();
     }
 
     public void Die()
@@ -35,7 +34,7 @@ public class PlayerManager : MonoBehaviour
         if (isDead) return;
         Debug.Log("[Player] Player Died!");
         isDead = true;
-        OnPlayerDeath.Invoke();
+        OnPlayerDeath.Invoke(this);
     }
 
     public void TakeHit()
