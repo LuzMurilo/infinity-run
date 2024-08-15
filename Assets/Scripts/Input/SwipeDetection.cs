@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class SwipeDetection : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class SwipeDetection : MonoBehaviour
     private float startTime;
     private Vector2 endPosition;
     private float endTime;
+    private bool swipeStarted;
+    private InputAction touchAction;
 
     public UnityEvent OnSwipeUp;
     public UnityEvent OnSwipeDown;
@@ -20,25 +23,40 @@ public class SwipeDetection : MonoBehaviour
     {
         InputManager.Instance.OnTouchStarted.AddListener(SwipeStart);
         InputManager.Instance.OnTouchEnded.AddListener(SwipeEnd);
+        swipeStarted = false;
     }
 
     private void OnDisable() 
     {
         InputManager.Instance.OnTouchStarted.RemoveListener(SwipeStart);
         InputManager.Instance.OnTouchEnded.RemoveListener(SwipeEnd);
+        swipeStarted = false;
     }
 
-    private void SwipeStart(Vector2 position, float time)
+    private void Update() 
     {
+        if (swipeStarted)
+        {
+            DetectSwipe(touchAction.ReadValue<Vector2>());
+        }
+    }
+
+    private void SwipeStart(InputAction action, float time)
+    {
+        touchAction = action;
+        Vector2 position = action.ReadValue<Vector2>();
         startPosition = position;
         startTime = time;
+        swipeStarted = true;
     }
 
     private void SwipeEnd(Vector2 position, float time)
     {
+        touchAction = null;
         endPosition = position;
         endTime = time;
-        DetectSwipe();
+        //DetectSwipe();
+        swipeStarted = false;
     }
 
     private void DetectSwipe()
@@ -49,6 +67,29 @@ public class SwipeDetection : MonoBehaviour
         if (endTime - startTime > maximumTime) return;
 
         Vector2 direction = (endPosition - startPosition).normalized;
+        if (Vector2.Dot(direction, Vector2.up) > 0.5f)
+        {
+            OnSwipeUp.Invoke();
+        }
+        else if (Vector2.Dot(direction, Vector2.down) > 0.5f)
+        {
+            OnSwipeDown.Invoke();
+        }
+        else if (Vector2.Dot(direction, Vector2.right) > 0.5f)
+        {
+            OnSwipeRight.Invoke();
+        }
+        else if (Vector2.Dot(direction, Vector2.left) > 0.5f)
+        {
+            OnSwipeLeft.Invoke();
+        }
+    }
+
+    private void DetectSwipe(Vector2 newPosition)
+    {
+        if (Vector2.Distance(startPosition, newPosition) < minimumDistance) return;
+        swipeStarted = false;
+        Vector2 direction = (newPosition - startPosition).normalized;
         if (Vector2.Dot(direction, Vector2.up) > 0.5f)
         {
             OnSwipeUp.Invoke();

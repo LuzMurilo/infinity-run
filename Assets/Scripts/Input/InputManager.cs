@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 
     private TouchControls touchControl;
 
-    public UnityEvent<Vector2, float> OnTouchStarted;
+    public UnityEvent<InputAction, float> OnTouchStarted;
     public UnityEvent<Vector2, float> OnTouchEnded;
 
     private void Awake() 
@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
 
     private void StartTouch(InputAction.CallbackContext context)
     {
-        OnTouchStarted.Invoke(touchControl.Player.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
+        OnTouchStarted.Invoke(touchControl.Player.TouchPosition, (float)context.startTime);
     }
     private void EndTouch(InputAction.CallbackContext context)
     {
