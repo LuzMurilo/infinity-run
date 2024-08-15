@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Singleton {get; private set;}
     [SerializeField] private TMP_Text coinDisplay;
+    [SerializeField] private TMP_Text distanceDisplay;
     [SerializeField] private List<GameObject> hearts;
     [SerializeField] private MainMenuController mainMenu;
     [SerializeField] private EndScreenController endScreen;
@@ -27,6 +28,12 @@ public class UIManager : MonoBehaviour
     public void SetCoinDisplayNumber(int coins)
     {
         coinDisplay.text = coins.ToString();
+    }
+
+    public void SetDistanceDisplayNumber(int distance)
+    {
+        if (distanceDisplay.text == distance.ToString() + "m") return;
+        distanceDisplay.text = distance.ToString() + "m";
     }
 
     public void SetHeartsDisplayed(int number)

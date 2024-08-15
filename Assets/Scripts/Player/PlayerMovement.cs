@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float speedIncreasePerBlock;
     private float addedSpeed;
+    private float distanceTraveled;
     [SerializeField] private float sideSpeed = 10.0f;
     [SerializeField] private float distanceBias = 0.01f;
     [SerializeField] private float jumpHeight = 3.0f;
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = true;
         isSlowed = false;
         currentLane = 0;
+        distanceTraveled = 0f;
     }
 
     private void FixedUpdate() 
@@ -115,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
         }
         
         transform.Translate(currentBlock.direction * Time.fixedDeltaTime * currentForwardSpeed, Space.World);
+
+        distanceTraveled += currentForwardSpeed * Time.fixedDeltaTime / 2f;  //divide by 2 because 1 unit is to small
+        UIManager.Singleton.SetDistanceDisplayNumber(Mathf.FloorToInt(distanceTraveled));
     }
 
     public void NewBlock(Block newBlock)
