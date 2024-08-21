@@ -52,11 +52,8 @@ public class BlockSpawner : MonoBehaviour
 
     public void ChangeNextSpawnPositon(Vector3 position)
     {
-        if (spawnQueue == 0) 
-        {
-            Debug.Log("Block spawned but queue is empty! (FirstBlock spawn)");
-            return;
-        }
+        if (spawnQueue == 0) return;
+        
         spawnQueue--;
         nextSpawnPosition = position;
         if (spawnQueue > 0)

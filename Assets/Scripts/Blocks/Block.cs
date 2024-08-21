@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Block : MonoBehaviour, ICollidable
 {
     [SerializeField] private Vector2 lengthLimits;
     [SerializeField] private Vector2 angleLimits;
+    [SerializeField] private float maxAngleDiference;
     [SerializeField] private float minObstacleDistance;
     [SerializeField] private Transform ground;
     [SerializeField] private List<LaneController> lanes;
@@ -25,11 +27,19 @@ public class Block : MonoBehaviour, ICollidable
 
     private void Awake() 
     {
+        if (!transform.parent.TryGetComponent<BlockSpawner>(out blockSpawner))
+        {
+            Debug.LogError("["+ gameObject.name +"] Failed to get Block Spawner Parent!");
+            return;
+        }
+
         lanesDict = new Dictionary<int, LaneController>();
         lanes.ForEach(lane => lanesDict.Add(lane.index, lane));
+
         length = Mathf.Floor(Random.Range(lengthLimits.x, lengthLimits.y));
-        angle = Mathf.Floor(Random.Range(angleLimits.x, angleLimits.y));
-        if (angle % 2 != 0) angle = 0.0f;
+
+        CalculateAngle();
+
         ground.localScale = new Vector3(ground.localScale.x, ground.localScale.y, length);
         transform.Rotate(new Vector3(angle, 0, 0), Space.Self);
         ground.localPosition = new Vector3(0, 0, length / 2);
@@ -37,10 +47,8 @@ public class Block : MonoBehaviour, ICollidable
 
         direction = (finish.position - start.position).normalized;
         
-        if (transform.parent.TryGetComponent<BlockSpawner>(out blockSpawner))
-        {
-            blockSpawner.ChangeNextSpawnPositon(finish.position);
-        }
+        
+        blockSpawner.ChangeNextSpawnPositon(finish.position);
 
         SpawnInteractables();
     }
@@ -80,5 +88,30 @@ public class Block : MonoBehaviour, ICollidable
 
         Vector3 spawnPosition = new Vector3(positionX, positionY, positionZ);
         Instantiate(prefabToSpawn, spawnPosition, transform.rotation, transform);
+    }
+
+    private void CalculateAngle()
+    {
+        if (angleLimits.magnitude == 0.0f)
+        {
+            angle = angleLimits.x;
+            return;
+        }
+        angle = Mathf.Floor(Random.Range(angleLimits.x, angleLimits.y));
+        if (angle % 2 != 0) angle = 0.0f;
+        if (blockSpawner.blocks.Count <= 0) return;
+        Block lastBlock = blockSpawner.blocks.Last(block => block != this);
+        if (lastBlock != null)
+        {
+            float angleDiference = angle - lastBlock.angle;
+            if (angleDiference > maxAngleDiference)
+            {
+                angle = lastBlock.angle + maxAngleDiference;
+            }
+            else if (angleDiference < -1f * maxAngleDiference)
+            {
+                angle = lastBlock.angle - maxAngleDiference;
+            }
+        }
     }
 }

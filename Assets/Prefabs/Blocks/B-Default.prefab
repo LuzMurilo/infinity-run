@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lengthLimits: {x: 50, y: 150}
   angleLimits: {x: -20, y: 30}
+  maxAngleDiference: 20
   minObstacleDistance: 20
   ground: {fileID: 7412605779706256796}
   lanes:
