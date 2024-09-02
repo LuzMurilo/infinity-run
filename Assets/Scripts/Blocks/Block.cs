@@ -63,31 +63,32 @@ public class Block : MonoBehaviour, ICollidable
     {
         if (interactables == null || interactables.Count == 0) return;
         InstantiateInteractable(0);
-        for (int i = Mathf.FloorToInt(length/minObstacleDistance) - 1; i > 0; i--)
-        {
-            InstantiateInteractable(i);
-        }
     }
 
-    private void InstantiateInteractable(int positionInBlock)
+    private void InstantiateInteractable(float positionInBlock)
     {
         if (interactables == null || interactables.Count == 0) return;
 
-        GameObject prefabToSpawn = interactables[Random.Range(0, interactables.Count)];
+        Interactable prefabToSpawn = interactables[Random.Range(0, interactables.Count)].GetComponent<Interactable>();
 
-        int[] possibleLanes = prefabToSpawn.GetComponent<Interactable>().Lanes;
+        int[] possibleLanes = prefabToSpawn.Lanes;
         int laneToSpawn = possibleLanes[Random.Range(0, possibleLanes.Length)];
 
         float positionX = lanesDict[laneToSpawn].transform.position.x;
         float positionY = transform.position.y + 0.5f;
-        float positionZ = transform.position.z + (positionInBlock * minObstacleDistance);
+        float positionZ = transform.position.z + positionInBlock;
         if (angle != 0.0f)
         {
-            positionY -= Mathf.Tan(Mathf.Deg2Rad * angle) * positionInBlock * minObstacleDistance;
+            positionY -= Mathf.Tan(Mathf.Deg2Rad * angle) * positionInBlock;
         }
 
         Vector3 spawnPosition = new Vector3(positionX, positionY, positionZ);
         Instantiate(prefabToSpawn, spawnPosition, transform.rotation, transform);
+
+        if (positionInBlock + prefabToSpawn.Length + (2*minObstacleDistance) < length)
+        {
+            InstantiateInteractable(positionInBlock + prefabToSpawn.Length + minObstacleDistance);
+        }
     }
 
     private void CalculateAngle()
