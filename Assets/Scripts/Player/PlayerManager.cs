@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,10 @@ public class PlayerManager : MonoBehaviour
     public int currentLife {get; private set;}
     public int totalCoins {get; private set;}
     public int blocksTraveled {get; private set;}
+    public int distanceTraveled {get; private set;}
     public bool isInvulnerable {get; private set;}
     public bool isDead {get; private set;}
+    public bool playerStarted {get; private set;} = false;
 
     public UnityEvent<PlayerManager> OnPlayerDeath; //this
     public UnityEvent OnTakeHit;
@@ -21,20 +24,24 @@ public class PlayerManager : MonoBehaviour
 
     public void StartPlayer()
     {
+        Debug.Log("[Player] Starting Player...");
         isInvulnerable = false;
         isDead = false;
         totalCoins = 0;
         blocksTraveled = 0;
         currentLife = maxLife;
         UIManager.Singleton.SetHeartsDisplayed(currentLife);
+        playerStarted = true;
     }
 
     public void Die()
     {
         if (isDead) return;
         Debug.Log("[Player] Player Died!");
+        distanceTraveled = Mathf.FloorToInt(playerMovement.distanceTraveled);
         isDead = true;
         OnPlayerDeath.Invoke(this);
+        GameManager.Singleton.SaveRunInfo(this);
     }
 
     public void TakeHit()

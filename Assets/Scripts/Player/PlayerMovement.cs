@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float speedIncreasePerBlock;
     private float addedSpeed;
-    private float distanceTraveled;
+    public float distanceTraveled {get; private set;}
     [SerializeField] private float sideSpeed = 10.0f;
     [SerializeField] private float distanceBias = 0.01f;
     [SerializeField] private float jumpHeight = 3.0f;

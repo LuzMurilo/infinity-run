@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen(PlayerManager player)
     {
-        endScreen.Setup(player.totalCoins);
+        endScreen.Setup(player.totalCoins, GameManager.Singleton.totalCoins);
         StartCoroutine(GameOverScreenDelay());
     }
 
